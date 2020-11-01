@@ -20,7 +20,7 @@ module.exports = async function (context, req) {
     const timestamp = Date.now();
     const text = req.body.text;
     // TODO 
-    const DateText = Date.prototype.getMonth();
+    //const DateText = Date.prototype.getMonth();
     
 
     context.bindings.outputDocument = {
@@ -28,7 +28,7 @@ module.exports = async function (context, req) {
         user_id,
         timestamp,
         text,
-        DateText,
+        //DateText,
     }
 
     context.res = {
