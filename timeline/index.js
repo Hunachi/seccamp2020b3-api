@@ -14,12 +14,23 @@ module.exports = async function (context, req) {
         return;
     }
 
+    if (req.body.previous_timestamp == null) {
+        context.res = {
+            status: 400,
+            body: `previous timestamp is null`,
+        };
+        return;
+    }
+
     const query = {
-        query: "SELECT * FROM c WHERE c.user_id = @user_id ORDER BY c.timestamp DESC",
+        query: "SELECT * FROM c WHERE c.user_id = @user_id AND c.timestamp >= @pre_time ORDER BY c.timestamp DESC",
         parameters: [
             {
                 name: "@user_id",
                 value: (req.body && req.body.id) ? req.body.id : user_id,
+            },{
+                name: "@pre_time",
+                value: req.body.previous_timestamp
             }
         ]
     };

@@ -19,12 +19,16 @@ module.exports = async function (context, req) {
     const user_id = req.headers['x-ms-client-principal-name'];
     const timestamp = Date.now();
     const text = req.body.text;
+    // TODO 
+    const DateText = Date.prototype.getMonth();
+    
 
     context.bindings.outputDocument = {
         id: `${user_id}_${timestamp}`,
         user_id,
         timestamp,
         text,
+        DateText,
     }
 
     context.res = {
